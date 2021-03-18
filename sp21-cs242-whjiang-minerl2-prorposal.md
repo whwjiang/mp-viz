@@ -1,11 +1,12 @@
 # mpviz: A Mountain Project Visualization Tool
 William Jiang (whjiang3) | Moderator: Miranda Liu (minerl2) <br>
-See what you have in common with climbers on Mountain Project!
+See what you have in common with climbers on Mountain Project! <br>
+Grading Rubric: https://docs.google.com/spreadsheets/d/1FvU92ir20-y8lPS7U3yCi-RGU1vfaOyKTCwAWLibZpU/edit?usp=sharing
 ## Abstract
 ### Project Purpose
 The purpose of this project is to enhance and augment the Mountain Project user experience by allowing users to visualize their ticks and to-dos in relation to other users.
 ### Project Motivation
-Mountain Project (mountainproject.com, MP from here on) is a site that houses crowd-sourced information specific to climbers. Essentially, climbers can create pages for climbing areas across the U.S. (and abroad) and within those areas, create pages for very specific climbing routes or bouldering problems. A climbing route is a general term for a specific way to scale a formation, usually determined by a sequence of moves, and a bouldering problem is a climbing route on a boulder. The value in having this information crowd-sourced is that a climber may be interested in climbing a route, but may not know where this route is, so they may look up this route on MP and find that other users have described exactly where the route they're looking for is. MP tends to beat guidebooks in several ways, one way being that it is free and another way being that the information is always extremely up to date.
+Mountain Project (https://mountainproject.com, MP from here on) is a site that houses crowd-sourced information specific to climbers. Essentially, climbers can create pages for climbing areas across the U.S. (and abroad) and within those areas, create pages for very specific climbing routes or bouldering problems. A climbing route is a general term for a specific way to scale a formation, usually determined by a sequence of moves, and a bouldering problem is a climbing route on a boulder. The value in having this information crowd-sourced is that a climber may be interested in climbing a route, but may not know where this route is, so they may look up this route on MP and find that other users have described exactly where the route they're looking for is. MP tends to beat guidebooks in several ways, one way being that it is free and another way being that the information is always extremely up to date.
 
 There is a function on MP that allows climbers to take the routes that they climb and indicate that they have climbed them successfully-- a "tick". You can go on anyone's profile and view all of the climbs that person has ever ticked, as well as a breakdown of then they occurred, how difficult the climb was, and a general sense of where the climb was.
 
@@ -39,9 +40,9 @@ Built into the soul of MP is its ability to facilitate social interactions betwe
 ### Week 1: web scraping, database integration
 | Category  | Total Score Allocated | Detailed Rubrics                                                            |
 |-----------|:---------:|-------------------------------------------------------------------------------|
-| User Scraping | 5 | +1: Scrapes routes <br> +1: Scrapes users <br> +1: Validates existence of user and route before scraping <br> +2: Only scrapes if entry is not in database|
+| User Scraping | 5 | +1: Name (string) <br> +1: Region, Age, Gender (string, int, string) <br> +1: Ticks (list of strings) <br> +1: To-do's (list of strings) <br> +1: Picture URL (string) <br> |
+| Route Scraping | 5 | +1: Name (string) <br> +1: Type (string) <br> +1: Difficulty (string) <br> +1: FA (string) <br> +1: Picture URL (string) <br> |
 | Database | 4 | 0: Didn't implement anything <br> 2: Writes to database w/o errors <br> 4: Read/write to database w/o errors |
-
 | .env |  1  |  +1: Stores sensitive information as environment variable |
 | Unit Testing |  10  | +1 per unit test |
 
