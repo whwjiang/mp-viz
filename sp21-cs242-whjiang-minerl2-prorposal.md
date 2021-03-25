@@ -40,36 +40,37 @@ Built into the soul of MP is its ability to facilitate social interactions betwe
 ### Week 1: web scraping, database integration
 | Category  | Total Score Allocated | Detailed Rubrics                                                            |
 |-----------|:---------:|-------------------------------------------------------------------------------|
-| User Scraping | 5 | +1: Name (string) <br> +1: Region, Age, Gender (string, int, string) <br> +1: Ticks (list of strings) <br> +1: To-do's (list of strings) <br> +1: Picture URL (string) <br> |
-| Route Scraping | 5 | +1: Name (string) <br> +1: Type (string) <br> +1: Difficulty (string) <br> +1: FA (string) <br> +1: Picture URL (string) <br> |
-| Database | 4 | 0: Didn't implement anything <br> 2: Writes to database w/o errors <br> 4: Read/write to database w/o errors |
+| User Scraping | 4.5 | +0.5: Name (string) <br> +0.5: Region, Age, Gender (string, int, string) <br> +0.5: Ticks (list of strings) <br> +0.5: To-do's (list of strings) <br> +0.5: Picture URL (string) <br> +1: report inability to find any of the information <br> +1: return scrape result as JSON object |
+| Route Scraping | 4.5 | +0.5: Name (string) <br> +0.5: Type (string) <br> +0.5: Difficulty (string) <br> +0.5: FA (string) <br> +0.5: Picture URL (string) <br> +1: report inability to find any of the information <br> +1: return scrape result as JSON object |
+| Database | 5 | 0: Didn't implement anything <br> +2: Writes to database w/o errors <br> +2: Reads from database w/o errors <br> +1: Reports errors from malformed database requests |
 | .env |  1  |  +1: Stores sensitive information as environment variable |
-| Unit Testing |  10  | +1 per unit test |
+| Unit Testing |  10  | +0.5 per unit test |
 
-### Week 2: fixed visualization, compute baseline information, API
+### Week 2: fixed visualization, compute static data, API
 | Category  | Total Score Allocated | Detailed Rubrics                                                            |
 |-----------|:---------:|-------------------------------------------------------------------------------|
-| Visualization | 5 | +1: Render user in network <br> +1: Render ticks in network <br> +1: Render to-do's in network <br> +1: Render two users in network <br> +1: Connect user's ticks and to-do's together|
-| Visualization Aesthetics | 3 | +1: Visualization uses color to indicate user node vs. route node <br> +1: Visualization uses size to indicate how popular a climb is <br> +1: Visualization renders nodes such that they are not too crowded |
+| Visualization | 3 | +1: Render users in network <br> +1: Render ticks and to-do's in network <br> +1: Connect user's ticks and to-do's together|
+| Visualization Aesthetics | 2 | +1: Visualization uses color to indicate user node vs. route node <br> +1: Visualization uses size to indicate how popular a climb is |
 | Computation on dataset | 5 | +1: Computes the number of ticks in common and what they are <br> +1: Computes the number of to-do's in common and what they are <br> +1: Computes the most popular climb in tick list exclusive to either climber <br> +1: Computes least popular climb exclusive to either climber <br> +1 Computes hardest tick for either climber in any discipline |
-| Computation API | 2 | +2: Makes computed information available as API |
-| Manual Test Plan |  5  | +1 per page of manual test plan for visualization |
-| Unit testing |  5  | +.5 for each unit test on computations and API |
+| Computation API | 5 | +1: API is able to handle queries involving one user <br> +1: API is able to handle queries involving two users <br> +1: returns successful queries as properly formatted JSON objects <br> +1: returns errors as JSON objects <br> +1: uses proper error codes when returning errors|
+| Manual Test Plan | 4 | +1 per page of manual test plan for visualization |
+| Unit testing | 6 | +.5 for each unit test on computations and API |
 
-### Week 3: website, display key information
+### Week 3: website, display static data
 | Category  | Total Score Allocated | Detailed Rubrics                                                            |
 |-----------|:---------:|-------------------------------------------------------------------------------|
-| Render Key Content | 4.5 | +1: Website takes two users as input <br> +1: Reports errors on finding users <br> +0.5 for each of the 5 key information computed in week 2 |
-| Website Aesthetics | 5 | +1: Website is contained in a single view <br> +1: Website allows navigation to start input view <br> +1: Website incorporates aesthetic color and fonts <br> +5: Website renders well on variety of platforms <br> +1: Website has attractive loading screen |
-| Website Sketch | 3.5 | +3.5: Detailed sketch of the website view |
-| ESlint | 2 | +2 presence of eslint |
+| Render Static Content | 5 | +1: Website takes two users as input <br> +1.5: Reports errors on finding users <br> +0.5 for each of the 5 static info computed in week 2 |
+| Website Aesthetics | 4 | +1: Website is contained in a single view with page navigation options <br> +1: Website incorporates aesthetic color and fonts <br> +1: Website renders well on variety of platforms <br> +1: Website has attractive loading screen |
+| Page Navigation | 2 | +1: Website allows navigation to start input view <br> +1: Website scrolls to display more information |
+| Website Sketch | 2 | +2: Detailed sketch of the website view |
+| ESlint | 2 | +1: proper setup <br> +1: reporting warnings |
 | Manual Test Plan | 10 | +1 per page of manual test plan |
 
 ### Week 4: make visualization interactive on website
 | Category  | Total Score Allocated | Detailed Rubrics                                                            |
 |-----------|:---------:|-------------------------------------------------------------------------------|
-| User Node View | 4 | +1: User view contains name <br> +1: User view displays age <br> +1: User view displays profile picture <br> +1: User view displays creation date |
-| Route Node View | 4 | +1: Route view contains name <br> +1: Route view displays type <br> +1: Route view displays FA <br> +1: Route view displays first picture |
+| User Node View | 4 | +3: View renders pertinent user information (name, area, profile picture, etc.) <br> +1: handles and displays errors on querying user |
+| Route Node View | 4 | +3: View renders pertinent route information (name, area, difficulty, pictures of routes, etc.) <br> +1: handles and displays errors on querying user |
 | Visualization responds to mouse controls | 5 | +1: dragging around visualization moves to different part of network <br> +1: scrolling in and out zooms in and out of network <br> +1: Clicking on user node displays user node view <br> +1: Clicking on route node displays route node view <br> +1: Clicking on visualization removes any view overlay |
 | Website Integration | 2 | +1: Visualization renders on separate page <br> +1: Visualization page has buttons for navigation back to the main page |
 | Manual Test Plan | 10 | +1 per page of manual test plan|
