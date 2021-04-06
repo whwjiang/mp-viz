@@ -12,6 +12,8 @@ import logging
 from bs4 import BeautifulSoup
 import requests
 
+DOMAIN = 'www.mountainproject.com'
+
 class UserScraper:
     """
     takes a url pointing to a mountainproject user and scrapes
@@ -19,14 +21,16 @@ class UserScraper:
     """
     def __init__(self, url):
         self.url = url
-        page = requests.get(url)
-
-        if page.status_code != 200:
-            raise Exception('invalid url')
 
         address = url.split('/')
+        if address[2] != DOMAIN:
+            raise Exception('not a mountain project page')
         if address[3] != 'user':
             raise Exception('not a user')
+
+        page = requests.get(url)
+        if page.status_code != 200:
+            raise Exception('invalid url')
 
         self.soup = BeautifulSoup(page.content, 'html.parser')
 
@@ -108,14 +112,15 @@ class RouteScraper:
     """
     def __init__(self, url):
         self.url = url
-        page = requests.get(url)
+        address = url.split('/')
+        if address[2] != DOMAIN:
+            raise Exception('not a mountain project page')
+        if address[3] != 'user':
+            raise Exception('not a user')
 
+        page = requests.get(url)
         if page.status_code != 200:
             raise Exception('invalid url')
-
-        address = url.split('/')
-        if address[3] != 'route':
-            raise Exception('not a route')
 
         self.soup = BeautifulSoup(page.content, 'html.parser')
 

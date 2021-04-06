@@ -73,7 +73,7 @@ class Database:
         try:
             users = self.db['user'].find({field: value})
         except:
-            raise Exception
+            raise KeyError
         else:
             return users
 
@@ -91,6 +91,6 @@ class Database:
         try:
             routes = self.db['route'].find({field: value})
         except:
-            raise Exception
+            raise KeyError
         else:
             return routes
