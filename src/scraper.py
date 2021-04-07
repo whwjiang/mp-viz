@@ -115,7 +115,7 @@ class RouteScraper:
         address = url.split('/')
         if address[2] != DOMAIN:
             raise Exception('not a mountain project page')
-        if address[3] != 'user':
+        if address[3] != 'route':
             raise Exception('not a user')
 
         page = requests.get(url)
