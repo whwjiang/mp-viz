@@ -8,4 +8,6 @@ This week, I am implementing a scraper to get information from users and routes 
 
 - Scrape user page: 'python3 src/main.py -u https://www.mountainproject.com/user/200305518/william-jiang'
 
+- Scrape big user: 'https://www.mountainproject.com/user/200225033/nathan-devan'
+
 - Scrape route page: 'python3 src/main.py -r https://www.mountainproject.com/route/108312228/comfortably-numb'

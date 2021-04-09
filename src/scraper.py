@@ -35,7 +35,7 @@ class UserScraper:
         self.soup = BeautifulSoup(page.content, 'html.parser')
 
         self.dict          = {}
-        self.route_urls    = []
+        self.route_urls    = {}
         self.id            = address[4]
         self.dict['_id']   = self.id
         self.dict['url']   = url
@@ -54,7 +54,7 @@ class UserScraper:
         returns a list of urls pointing to routes in user's todos
         and ticks.
         """
-        return self.route_urls
+        return list(self.route_urls.keys())
 
     def __parse_elements(self):
         try:
@@ -100,7 +100,7 @@ class UserScraper:
             except:
                 pass
             else:
-                self.route_urls.append(route_url)
+                self.route_urls[route_url] = 1
                 routes[route_url.split('/')[4]] = 1
 
         self.dict[kind] = list(routes.keys())
@@ -115,8 +115,8 @@ class RouteScraper:
         address = url.split('/')
         if address[2] != DOMAIN:
             raise Exception('not a mountain project page')
-        if address[3] != 'user':
-            raise Exception('not a user')
+        if address[3] != 'route':
+            raise Exception('not a route')
 
         page = requests.get(url)
         if page.status_code != 200:
