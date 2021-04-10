@@ -70,12 +70,8 @@ class Database:
         @returns:
         users: the result of query in the database
         """
-        try:
-            users = self.db['user'].find({field: value})
-        except:
-            raise KeyError
-        else:
-            return users
+        users = self.db['user'].find({field: value})
+        return users
 
     def query_routes(self, field, value):
         """
@@ -88,9 +84,33 @@ class Database:
         @returns:
         routes: the result of query in the database
         """
-        try:
-            routes = self.db['route'].find({field: value})
-        except:
-            raise KeyError
-        else:
-            return routes
+        routes = self.db['route'].find({field: value})
+        return routes
+
+    def count_users(self, field, value):
+        """
+        counts all MongoDB users pertaining to the value at field
+
+        @params:
+        field: the property being found
+        value: the value of the field being queried
+
+        @returns:
+        count: the result of query in the database
+        """
+        count = self.db['user'].count_documents({field: value})
+        return count
+
+    def count_routes(self, field, value):
+        """
+        finds all MongoDB routes pertaining to the value at field
+
+        @params:
+        field: the property being found
+        value: the value of the field being queried
+
+        @returns:
+        routes: the result of query in the database
+        """
+        count = self.db['route'].find({field: value})
+        return count

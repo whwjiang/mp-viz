@@ -1,13 +1,9 @@
-# sp21-cs242-project: mpviz Week 1
+# sp21-cs242-project: mpviz Week 2
 
 ## Description
 
-This week, I am implementing a scraper to get information from users and routes on Mountain Project, and putting the information I obtain from scraping onto a MongoDB database. The interface is a simple command prompt on main.py. I also implemented some unit testing for scraping and for the database.
+This week, I implemented various algorithms to compute some static information based on users. All the information I computed is available as an API hosted in flask. I then started working on the data visualization.
 
 ## Example Execution
 
-- Scrape user page: 'python3 src/main.py -u https://www.mountainproject.com/user/200305518/william-jiang'
-
-- Scrape big user: 'https://www.mountainproject.com/user/200225033/nathan-devan'
-
-- Scrape route page: 'python3 src/main.py -r https://www.mountainproject.com/route/108312228/comfortably-numb'
+- python3 query.py -q '200305518&200696013?ticks'

@@ -54,8 +54,9 @@ class Route:
         a, -, a/b, b, none, b/c, c, +, c/d, d
         """
         score = 4
-        pattern = '(\.[1]?[0-9])([+,-])?(a/b|b/c|c/d)?([a-d])?'
+        pattern = '5(\.[1]?[0-9])([+,-])?(a/b|b/c|c/d)?([a-d])?'
         match = re.search(pattern, self.grade)
+        # TODO: implement parsing for ice climbing, other systems
         if match is None:
             return score
         score += int(match.group(1)) * 10
@@ -81,3 +82,6 @@ class Route:
 
     def __eq__(self, other):
         return self._id == other._id
+    
+    def __str__(self):
+        return 'Name: {}'.format(self.name)

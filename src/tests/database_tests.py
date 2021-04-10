@@ -60,7 +60,7 @@ class database_tests(unittest.TestCase):
         data = json.load(import_file)
         db.insert_doc(data, 'user')
         result = db.query_users('_id', '0')
-        self.assertIsNotNone(result)
+        self.assertEqual(len(list(result)), 1)
         db.db['user'].delete_one({'_id': '0'})
         import_file.close()
 
@@ -69,7 +69,7 @@ class database_tests(unittest.TestCase):
         data = json.load(import_file)
         db.insert_doc(data, 'route')
         result = db.query_routes('_id', '0')
-        self.assertIsNotNone(result)
+        self.assertEqual(len(list(result)), 1)
         db.db['route'].delete_one({'_id': '0'})
         import_file.close()
 

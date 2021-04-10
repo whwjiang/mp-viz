@@ -14,22 +14,16 @@ Things computable:
 """
 
 from route import Route
-"""
-class Compute:
-    def __init__(self, l0: list, l1: list):
-        self.lists = []
-        self.lists.append([Route(item) for item in l0])
-        self.lists.append([Route(item) for item in l1])
-
-        self.sets = []
-        self.sets.append(set(lists[0]))
-        self.sets.append(set(lists[1]))
-"""
-
 
 def common(l1: list, l2: list) -> list:
     """
+    computes all routes in common between two lists
+    @params:
+    l1: list of routes
+    l2: list of routes
 
+    @returns:
+    set intersection of l1 and l2
 
     """
     if l1 is None or l2 is None:
@@ -42,7 +36,7 @@ def common(l1: list, l2: list) -> list:
 
 def popular(l1: list, l2: list) -> (Route, Route):
     """
-
+    
     """
 
     if l1 is None or l2 is None:
