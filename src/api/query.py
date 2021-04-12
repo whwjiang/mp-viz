@@ -17,6 +17,8 @@ types of queries:
 
 """
 
+sys.path.append('../retrieval')
+
 import pprint
 import re
 import argparse
@@ -25,7 +27,7 @@ import compute
 from route import Route
 from database import Database
 
-QUERY_T = ('ticks', 'todos', 'popular', 'unpopular', 'hardest', 'vis')
+QUERY_T = ('tick', 'todo', 'popular', 'unpopular', 'hardest', 'vis')
 
 class Query:
     """
@@ -46,8 +48,19 @@ class Query:
             # TODO: attempt a user scrape before doing this
             raise KeyError('user(s) are not in database')
 
+        users = self.db.query_users('_id', {'$in': self.ids})
+        users_routes = []
+        for doc in users:
+            users_routes.append(doc[self.query_t])
+        
+        self.routes = []
+
+        for route_list in users_routes:
+            q = self.db.query_routes('_id', {'$in': route_list})
+            self.routes.append([Route(item) for item in q])
+
     def send_request(self):
-        if self.query_t == 'todos' or self.query_t == 'ticks':
+        if self.query_t == 'todo' or self.query_t == 'tick':
             self.__exec_common()
             return
         if self.query_t == 'popular':
@@ -62,7 +75,6 @@ class Query:
         if self.query_t == 'vis':
             self.__exec_vis()
             return
-        
         return
 
     def __parse_query(self, q: str):
@@ -82,35 +94,23 @@ class Query:
             raise KeyError
     
     def __exec_common(self):
-        result = self.db.query_users('_id', {'$in': self.ids})
-        routes = []
-        for doc in result:
-            routes.append(doc.get(self.query_t))
-
-        q0 = self.db.query_routes('_id', {'$in': routes[0]})
-        l0 = [Route(item) for item in q0]
-        q1 = self.db.query_routes('_id', {'$in': routes[1]})
-        l1 = [Route(item) for item in q1]
-
-        for item in l0:
-            print(item)
-        print(len(l0))
-
-        
+        common_list = compute.common(self.routes[0], self.routes[1])
+        return {self.query_t: [vars(item) for item in common_list]}
 
     def __exec_popular(self):
-        pass
+        popular = compute.popular(self.routes[0], self.routes[1])
+        return {self.query_t: [vars(item) for item in popular]}
 
     def __exec_unpopular(self):
-        pass
+        unpopular = compute.unpopular(self.routes[0], self.routes[1])
+        return {self.query_t: [vars(item) for item in unpopular]}
 
     def __exec_hardest(self):
-        pass
+        return {self.query_t: compute.hardest(self.routes[0])}
 
     def __exec_vis(self):
         pass
-
-        
+     
 
 def main():
     parser = argparse.ArgumentParser(description='query static info')
@@ -120,8 +120,6 @@ def main():
 
     q = Query(args.query[0])
     q.send_request()
-
-
 
 if __name__ == '__main__':
     main()

@@ -5,7 +5,7 @@ import unittest
 import pymongo
 import sys
 
-sys.path.append('/home/whjiang/coding/cs242/sp21-cs242-project/src')
+sys.path.append('../retrieval')
 
 from database import Database
 db = Database()

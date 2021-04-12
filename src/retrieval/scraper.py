@@ -86,7 +86,7 @@ class UserScraper:
         for i, row in df.iterrows():
             # print(i, row['URL'])
             self.route_urls[row['URL']] = 1
-            routes.append(url)
+            routes.append(row['URL'].split('/')[4])
         
         self.dict[kind] = routes
 

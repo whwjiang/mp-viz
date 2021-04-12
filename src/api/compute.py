@@ -71,10 +71,10 @@ def unpopular(l1: list, l2: list) -> (Route, Route):
 
     p1 = None
     if s1_exclusive:
-        p1 = min(s1_exclusive, key = lambda k: k.rating_count)
+        p1 = min(s1_exclusive, key = lambda k: k.rating)
     p2 = None
     if s2_exclusive:
-        p2 = min(s2_exclusive, key = lambda k: k.rating_count)
+        p2 = min(s2_exclusive, key = lambda k: k.rating)
 
     return (p1, p2)
 

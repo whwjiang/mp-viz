@@ -5,7 +5,7 @@ import unittest
 import pymongo
 import sys
 
-sys.path.append('/home/whjiang/coding/cs242/sp21-cs242-project/src')
+sys.path.append('../api')
 
 BASIC_ROUTE = {"_id":"0","url":"","image_urls":[],"name":"","grade":"V0","rating":"0.0","rating_count":"0","type":"Boulder"}
 

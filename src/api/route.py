@@ -26,6 +26,7 @@ class Route:
         self.name = json['name']
         self.grade = json['grade']
         self.rating_count = json['rating_count']
+        self.rating = json['rating']
         self.type = json['type']
 
     def grade_to_int(self):
