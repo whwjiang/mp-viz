@@ -20,9 +20,9 @@ class Database:
     """
     def __init__(self):
         load_dotenv()
-        user = os.environ.get('USER')
+        login = os.environ.get('LOGIN')
         token = os.environ.get('TOKEN')
-        self.client = MongoClient(URL.format(user, token))
+        self.client = MongoClient(URL.format(login, token))
 
         self.db = self.client['mp']
 
