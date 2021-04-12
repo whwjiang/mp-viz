@@ -12,11 +12,11 @@ There is a function on MP that allows climbers to take the routes that they clim
 
 Built into the soul of MP is its ability to facilitate social interactions between climbers over the internet: there is a forum that connects climbers across the country and a partner finder for those in need of people to climb with. However, I think there is a dimension missing, which is that climbers should be able to very easily compare each other based on what they have climbed. Thus, my project aims to satisfy this missing component, by providing climbers with a means to compare each other, based on criterion like where they have climbed together, what grades they have climbed the same, and what they would like to climb together in the future.
 ## Technical Specification
-- Platform: Cross-platform website (React Native)
+- Platform: Cross-platform website (React)
 - Programming Languages: Javascript for frontend, Python for backend
 - Stylistic Conventions: Airbnb JavaScript Style Guide, PEP8
-- SDK: Facebook SDK for React Native
-- IDE: Atom
+- SDK: Facebook SDK for React
+- IDE: VS code
 - Tools/Interfaces: sigma.js for network visualization, Flask to deploy site
 - Target Audience: MP users
 
@@ -46,15 +46,13 @@ Built into the soul of MP is its ability to facilitate social interactions betwe
 | .env |  1  |  +1: Stores sensitive information as environment variable |
 | Unit Testing |  10  | +0.5 per unit test |
 
-### Week 2: fixed visualization, compute static data, API
+### Week 2: compute static data, parse queries, API
 | Category  | Total Score Allocated | Detailed Rubrics                                                            |
 |-----------|:---------:|-------------------------------------------------------------------------------|
-| Visualization | 3 | +1: Render users in network <br> +1: Render ticks and to-do's in network <br> +1: Connect user's ticks and to-do's together|
-| Visualization Aesthetics | 2 | +1: Visualization uses color to indicate user node vs. route node <br> +1: Visualization uses size to indicate how popular a climb is |
-| Computation on dataset | 5 | +1: Computes the number of ticks in common and what they are <br> +1: Computes the number of to-do's in common and what they are <br> +1: Computes the most popular climb in tick list exclusive to either climber <br> +1: Computes least popular climb exclusive to either climber <br> +1 Computes hardest tick for either climber in any discipline |
+| Computation Correctness | 5 | +1: Computes the number of ticks in common and what they are <br> +1: Computes the number of to-do's in common and what they are <br> +1: Computes the most popular climb in tick list exclusive to either climber <br> +1: Computes least popular climb exclusive to either climber <br> +1 Computes hardest tick for either climber in any discipline |
+| Query Parser | 5 | +1 per correctly parsed operation (common ticks, common todos, popular, unpopular, hardest) |
 | Computation API | 5 | +1: API is able to handle queries involving one user <br> +1: API is able to handle queries involving two users <br> +1: returns successful queries as properly formatted JSON objects <br> +1: returns errors as JSON objects <br> +1: uses proper error codes when returning errors|
-| Manual Test Plan | 4 | +1 per page of manual test plan for visualization |
-| Unit testing | 6 | +.5 for each unit test on computations and API |
+| Unit testing | 10 | +.5 for each unit test on query parser, computations and API |
 
 ### Week 3: website, display static data
 | Category  | Total Score Allocated | Detailed Rubrics                                                            |
@@ -66,11 +64,12 @@ Built into the soul of MP is its ability to facilitate social interactions betwe
 | ESlint | 2 | +1: proper setup <br> +1: reporting warnings |
 | Manual Test Plan | 10 | +1 per page of manual test plan |
 
-### Week 4: make visualization interactive on website
+### Week 4: visualization integration
 | Category  | Total Score Allocated | Detailed Rubrics                                                            |
 |-----------|:---------:|-------------------------------------------------------------------------------|
-| User Node View | 4 | +3: View renders pertinent user information (name, area, profile picture, etc.) <br> +1: handles and displays errors on querying user |
-| Route Node View | 4 | +3: View renders pertinent route information (name, area, difficulty, pictures of routes, etc.) <br> +1: handles and displays errors on querying user |
+| Visualization | 3 | +1: Render users in network <br> +1: Render ticks and to-do's in network <br> +1: Connect user's ticks and to-do's together|
+| Visualization Aesthetics | 2 | +1: Visualization uses color to indicate user node vs. route node <br> +1: Visualization uses size to indicate how popular a climb is |
+| Route/User Node View | 3 | +1: View renders pertinent route information (name, area, difficulty, pictures of routes, etc.) <br> +1: View renders pertinent user information (name, area, profile picture, etc.)<br> +1: handles and displays errors on querying user/route |
 | Visualization responds to mouse controls | 5 | +1: dragging around visualization moves to different part of network <br> +1: scrolling in and out zooms in and out of network <br> +1: Clicking on user node displays user node view <br> +1: Clicking on route node displays route node view <br> +1: Clicking on visualization removes any view overlay |
 | Website Integration | 2 | +1: Visualization renders on separate page <br> +1: Visualization page has buttons for navigation back to the main page |
 | Manual Test Plan | 10 | +1 per page of manual test plan|
