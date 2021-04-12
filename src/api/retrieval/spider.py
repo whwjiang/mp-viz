@@ -16,7 +16,8 @@ def user_scrape_and_insert(url):
         try:
             db.insert_doc(user.get_json(), 'user')
         except errors.DuplicateKeyError:
-            print('{}: user already inserted'.format(user.id))
+            db.update_doc(user.get_json(), 'user')
+            print('{}: updated user'.format(user.id))
         else:
             print('{}: inserted user'.format(user.id))
         for url in user.get_route_urls():
@@ -32,7 +33,8 @@ def route_scrape_and_insert(url):
         try:
             db.insert_doc(route.get_json(), 'route')
         except errors.DuplicateKeyError:
-            print('{}: route already inserted'.format(route.id))
+            db.update_doc(route.get_json(), 'route')
+            print('{}: updated route'.format(route.id))
         else:
             print('{}: inserted route'.format(route.id))
 

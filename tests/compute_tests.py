@@ -5,12 +5,12 @@ import unittest
 import pymongo
 import sys
 
-sys.path.append('../api')
+sys.path.append('..')
 
 BASIC_ROUTE = {"_id":"0","url":"","image_urls":[],"name":"","grade":"V0","rating":"0.0","rating_count":"0","type":"Boulder"}
 
-import compute
-from route import Route
+from src.api import compute
+from src.api.route import Route 
 
 class compute_tests(unittest.TestCase):
     def test_common_success(self):
@@ -55,6 +55,11 @@ class compute_tests(unittest.TestCase):
         l.append(r_hard)
         hardest = compute.hardest(l)
         self.assertEqual(r_hard, hardest)
+    
+    def test_hardest_failure(self):
+        l = []
+        hardest = compute.hardest(l)
+        self.assertIsNone(hardest)
 
 if __name__ == '__main__':
     unittest.main()

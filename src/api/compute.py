@@ -13,7 +13,7 @@ Things computable:
 
 """
 
-from route import Route
+from .route import Route
 
 def common(l1: list, l2: list) -> list:
     """
@@ -24,7 +24,6 @@ def common(l1: list, l2: list) -> list:
 
     @returns:
     set intersection of l1 and l2
-
     """
     if l1 is None or l2 is None:
         return []
@@ -36,7 +35,16 @@ def common(l1: list, l2: list) -> list:
 
 def popular(l1: list, l2: list) -> (Route, Route):
     """
-    
+    computes two routes that have the highest rating exclusive 
+    to either list
+
+    @params:
+    l1: list of routes
+    l2: list of routes
+
+    @returns:
+    p1: highest rated route exclusive to the first list
+    p2: highest rated route exclusive to the second list
     """
 
     if l1 is None or l2 is None:
@@ -58,7 +66,16 @@ def popular(l1: list, l2: list) -> (Route, Route):
 
 def unpopular(l1: list, l2: list) -> (Route, Route):
     """
+    computes two routes that have the lowest rating count 
+    exclusive to either list
+    
+    @params:
+    l1: list of routes
+    l2: list of routes
 
+    @returns:
+    p1: least rated route exclusive to the first list
+    p2: least rated route exclusive to the second list
     """
 
     if l1 is None or l2 is None:
@@ -80,7 +97,14 @@ def unpopular(l1: list, l2: list) -> (Route, Route):
 
 def hardest(l: list) -> Route:
     """
+    returns the hardest climb in l. assumes l has all the same type of
+    route.
 
+    @params:
+    l: list of routes
+
+    @returns:
+    hard: the hardest route in l
     """
 
     try:
