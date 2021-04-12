@@ -83,5 +83,9 @@ def hardest(l: list) -> Route:
 
     """
 
-    hard = max(l, key = lambda k: k.grade_to_int())
-    return hard
+    try:
+        hard = max(l, key = lambda k: k.grade_to_int())
+    except ValueError:
+        return None
+    else:
+        return hard

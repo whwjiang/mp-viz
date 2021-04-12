@@ -59,7 +59,7 @@ class database_tests(unittest.TestCase):
         import_file = open('user.json', 'r')
         data = json.load(import_file)
         db.insert_doc(data, 'user')
-        result = db.query_users('_id', '0')
+        result = db.find_users('_id', '0')
         self.assertEqual(len(list(result)), 1)
         db.db['user'].delete_one({'_id': '0'})
         import_file.close()
@@ -68,17 +68,17 @@ class database_tests(unittest.TestCase):
         import_file = open('route.json', 'r')
         data = json.load(import_file)
         db.insert_doc(data, 'route')
-        result = db.query_routes('_id', '0')
+        result = db.find_routes('_id', '0')
         self.assertEqual(len(list(result)), 1)
         db.db['route'].delete_one({'_id': '0'})
         import_file.close()
 
     def test_non_user_query(self):
-        result = db.query_users('_id', '-1')
+        result = db.find_users('_id', '-1')
         self.assertEqual(len(list(result)), 0)
 
     def test_non_route_query(self):
-        result = db.query_routes('_id', '-1')
+        result = db.find_routes('_id', '-1')
         self.assertEqual(len(list(result)), 0)
 
     def test_update_nonexistent_user(self):

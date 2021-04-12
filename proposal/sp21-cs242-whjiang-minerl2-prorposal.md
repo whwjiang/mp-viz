@@ -49,7 +49,7 @@ Built into the soul of MP is its ability to facilitate social interactions betwe
 ### Week 2: compute static data, parse queries, API
 | Category  | Total Score Allocated | Detailed Rubrics                                                            |
 |-----------|:---------:|-------------------------------------------------------------------------------|
-| Computation Correctness | 5 | +1: Computes the number of ticks in common and what they are <br> +1: Computes the number of to-do's in common and what they are <br> +1: Computes the most popular climb in tick list exclusive to either climber <br> +1: Computes least popular climb exclusive to either climber <br> +1 Computes hardest tick for either climber in any discipline |
+| Computation on Dataset | 5 | +1: Computes the number of ticks in common and what they are <br> +1: Computes the number of to-do's in common and what they are <br> +1: Computes the most popular climb in tick list exclusive to either climber <br> +1: Computes least popular climb exclusive to either climber <br> +1 Computes hardest tick for either climber in any discipline |
 | Query Parser | 5 | +1 per correctly parsed operation (common ticks, common todos, popular, unpopular, hardest) |
 | Computation API | 5 | +1: API is able to handle queries involving one user <br> +1: API is able to handle queries involving two users <br> +1: returns successful queries as properly formatted JSON objects <br> +1: returns errors as JSON objects <br> +1: uses proper error codes when returning errors|
 | Unit testing | 10 | +.5 for each unit test on query parser, computations and API |

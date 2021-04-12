@@ -12,22 +12,30 @@ types of queries:
 <user>&<user>?todos: get common todos between two users
 <user>&<user>?popular: get popular climb exclusive to either user
 <user>&<user>?unpopular: get popular climb exclusive to either user
-<user>?hardest: get hardest boulder and rope climb in user's ticks
+<user>?hardest-<type>: get hardest <type> climb in user's ticks
 <user>&<user>?vis: get visualization formed from two users (not done)
 
 """
 
-sys.path.append('../retrieval')
-
+import sys
 import pprint
 import re
 import argparse
 
 import compute
 from route import Route
-from database import Database
+from retrieval.database import Database
 
-QUERY_T = ('tick', 'todo', 'popular', 'unpopular', 'hardest', 'vis')
+QUERY_T = ('user', 
+           'route', 
+           'tick', 
+           'todo', 
+           'popular', 
+           'unpopular', 
+           'hardest-boulder',
+           'hardest-trad',
+           'hardest-sport', 
+           'vis')
 
 class Query:
     """
@@ -43,39 +51,26 @@ class Query:
 
         self.db = Database()
         try:
-            self.__validate_users()
+            self.__validate_inputs()
         except KeyError:
             # TODO: attempt a user scrape before doing this
-            raise KeyError('user(s) are not in database')
-
-        users = self.db.query_users('_id', {'$in': self.ids})
-        users_routes = []
-        for doc in users:
-            users_routes.append(doc[self.query_t])
-        
-        self.routes = []
-
-        for route_list in users_routes:
-            q = self.db.query_routes('_id', {'$in': route_list})
-            self.routes.append([Route(item) for item in q])
+            raise KeyError('input(s) are not in database')
 
     def send_request(self):
+        if self.query_t == 'user':
+            return self.__exec_user()
+        if self.query_t == 'route':
+            return self.__exec_route()
+        self.__setup_compute()
         if self.query_t == 'todo' or self.query_t == 'tick':
-            self.__exec_common()
-            return
+            return self.__exec_common()
         if self.query_t == 'popular':
-            self.__exec_popular()
-            return
+            return self.__exec_popular()
         if self.query_t == 'unpopular':
-            self.__exec_unpopular()
-            return
-        if self.query_t == 'hardest':
-            self.__exec_hardest()
-            return
+            return self.__exec_unpopular()
         if self.query_t == 'vis':
-            self.__exec_vis()
-            return
-        return
+            return self.__exec_vis()
+        return self.__exec_hardest()
 
     def __parse_query(self, q: str):
         pattern = '([0-9]+)&?([0-9]+)?\?([a-z]+)'
@@ -85,14 +80,38 @@ class Query:
             raise Exception('invalid query')
         
         self.ids.append(m.group(1))
-        self.ids.append(m.group(2))
+        if m.group(2):
+            self.ids.append(m.group(2))
         self.query_t = m.group(3)
 
-    def __validate_users(self):
+    def __validate_inputs(self):
         value = {'$in': self.ids}
-        if self.db.count_users('_id', value) != len(self.ids):
+        if self.query_t == 'route':
+            if self.db.count_routes('_id', value) != len(self.ids):
+                raise KeyError
+        elif self.db.count_users('_id', value) != len(self.ids):
             raise KeyError
     
+    def __setup_compute(self):
+        users = self.db.find_users('_id', {'$in': self.ids})
+        users_routes = []
+        for doc in users:
+            users_routes.append(doc[self.query_t])
+        
+        self.routes = []
+
+        for route_list in users_routes:
+            q = self.db.find_('_id', {'$in': route_list})
+            self.routes.append([Route(item) for item in q])
+    
+    def __exec_user(self):
+        result = self.db.find_user('_id', {'$in': self.ids})
+        return result
+
+    def __exec_route(self):
+        result = self.db.find_route('_id', {'$in': self.ids})
+        return result
+
     def __exec_common(self):
         common_list = compute.common(self.routes[0], self.routes[1])
         return {self.query_t: [vars(item) for item in common_list]}
@@ -106,7 +125,9 @@ class Query:
         return {self.query_t: [vars(item) for item in unpopular]}
 
     def __exec_hardest(self):
-        return {self.query_t: compute.hardest(self.routes[0])}
+        climb_t = self.query_t.split('-')[1]
+        route_list = [i for i in self.routes[0] if i.type == climb_t]
+        return {self.query_t: compute.hardest(route_list)}
 
     def __exec_vis(self):
         pass
@@ -119,7 +140,7 @@ def main():
     args = parser.parse_args()
 
     q = Query(args.query[0])
-    q.send_request()
+    pprint.pprint(q.send_request())
 
 if __name__ == '__main__':
     main()

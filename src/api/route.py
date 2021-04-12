@@ -7,8 +7,8 @@ Written by William Jiang on 04/07/2020
 A container class for route information
 
 """
-import re
 
+import re
 from dataclasses import dataclass
 
 @dataclass(unsafe_hash=True)

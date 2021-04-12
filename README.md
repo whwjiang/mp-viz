@@ -6,4 +6,6 @@ This week, I implemented various algorithms to compute some static information b
 
 ## Example Execution
 
-- python3 src/query.py -q '200305518&200696013?tick'
+- get user info: python3 src/api/query.py -q '200305518?user'
+- get route info: python3 src/api/query.py -q '106333612?user'
+- get common ticks: python3 src/api/query.py -q '200305518&200696013?tick'
