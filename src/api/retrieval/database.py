@@ -7,8 +7,9 @@ Contains wrappers for interfacing with a MongoDB database
 
 """
 
+import time
 import os
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
 from dotenv import load_dotenv
 
 URL = 'mongodb+srv://{}:{}@cluster0.f0mds.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
@@ -20,9 +21,9 @@ class Database:
     """
     def __init__(self):
         load_dotenv()
-        user = os.environ.get('USER')
+        login = os.environ.get('LOGIN')
         token = os.environ.get('TOKEN')
-        self.client = MongoClient(URL.format(user, token))
+        self.client = MongoClient(URL.format(login, token))
 
         self.db = self.client['mp']
 
@@ -59,7 +60,7 @@ class Database:
         result = self.db[col].update_one({'_id': json['_id']}, {'$set': json})
         return result
 
-    def query_users(self, field, value):
+    def find_users(self, field, value):
         """
         finds all MongoDB users pertaining to the value at field
 
@@ -70,14 +71,10 @@ class Database:
         @returns:
         users: the result of query in the database
         """
-        try:
-            users = self.db['user'].find({field: value})
-        except:
-            raise KeyError
-        else:
-            return users
+        users = self.db['user'].find({field: value})
+        return users
 
-    def query_routes(self, field, value):
+    def find_routes(self, field, value):
         """
         finds all MongoDB routes pertaining to the value at field
 
@@ -88,9 +85,61 @@ class Database:
         @returns:
         routes: the result of query in the database
         """
-        try:
-            routes = self.db['route'].find({field: value})
-        except:
-            raise KeyError
-        else:
-            return routes
+        routes = self.db['route'].find({field: value})
+        return routes
+
+    def find_user(self, field, value):
+        """
+        finds all MongoDB users pertaining to the value at field
+
+        @params:
+        field: the property being found
+        value: the value of the field being queried
+
+        @returns:
+        user: the result of query in the database
+        """
+        user = self.db['user'].find_one({field: value})
+        return user
+
+    def find_route(self, field, value):
+        """
+        finds all MongoDB routes pertaining to the value at field
+
+        @params:
+        field: the property being found
+        value: the value of the field being queried
+
+        @returns:
+        route: the result of query in the database
+        """
+        route = self.db['route'].find_one({field: value})
+        return route
+
+    def count_users(self, field, value):
+        """
+        counts all MongoDB users pertaining to the value at field
+
+        @params:
+        field: the property being found
+        value: the value of the field being queried
+
+        @returns:
+        count: the result of query in the database
+        """
+        count = self.db['user'].count_documents({field: value})
+        return count
+
+    def count_routes(self, field, value):
+        """
+        finds all MongoDB routes pertaining to the value at field
+
+        @params:
+        field: the property being found
+        value: the value of the field being queried
+
+        @returns:
+        routes: the result of query in the database
+        """
+        count = self.db['route'].count_documents({field: value})
+        return count

@@ -5,9 +5,9 @@ import unittest
 import pymongo
 import sys
 
-sys.path.append('/home/whjiang/coding/cs242/sp21-cs242-project/src')
+sys.path.append('..')
 
-from scraper import UserScraper, RouteScraper
+from src.api.retrieval.scraper import UserScraper, RouteScraper
 
 class scraper_tests(unittest.TestCase):
     def test_bad_user_domain(self):

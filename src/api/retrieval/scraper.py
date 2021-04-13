@@ -8,7 +8,8 @@ mountainproject.com
 
 """
 
-import logging
+import csv 
+import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 
@@ -35,7 +36,7 @@ class UserScraper:
         self.soup = BeautifulSoup(page.content, 'html.parser')
 
         self.dict          = {}
-        self.route_urls    = []
+        self.route_urls    = {}
         self.id            = address[4]
         self.dict['_id']   = self.id
         self.dict['url']   = url
@@ -54,17 +55,13 @@ class UserScraper:
         returns a list of urls pointing to routes in user's todos
         and ticks.
         """
-        return self.route_urls
+        return list(self.route_urls.keys())
 
     def __parse_elements(self):
-        try:
-            self.__parse_name()
-        except:
-            logging.info('{}: missing name'.format(self.id))
-
+        self.__parse_name()
         self.__parse_avatar_url()
-        self.__parse_routes('todos')
-        self.__parse_routes('ticks')
+        self.__parse_routes('todo')
+        self.__parse_routes('tick')
 
 
     def __parse_name(self):
@@ -74,7 +71,6 @@ class UserScraper:
             self.dict['name'] = name.get_text().strip()
         except:
             self.dict['name'] = ''
-            raise
 
     def __parse_avatar_url(self):
         url = self.soup.find(class_='user-img-avatar lazy').get('data-original')
@@ -83,27 +79,16 @@ class UserScraper:
         self.dict['avatar_url'] = url
 
     def __parse_routes(self, kind):
-        url = '{}/ticks'.format(self.url)
-        if kind == 'todos':
-            url = '{}/climb-todo-list'.format(self.url)
-        page = requests.get(url)
-
-        if page.status_code != 200:
-            raise Exception('invalid url')
-
-        todo_soup = BeautifulSoup(page.content, 'html.parser')
-        rows = todo_soup.find_all(class_='route-row')
-        routes = {}
-        for i in rows:
-            try:
-                route_url = i.find('a').get('href')
-            except:
-                pass
-            else:
-                self.route_urls.append(route_url)
-                routes[route_url.split('/')[4]] = 1
-
-        self.dict[kind] = list(routes.keys())
+        url = '{}/{}-export'.format(self.url, kind)
+        
+        routes = []
+        df = pd.read_csv(url, usecols=['URL'])
+        for i, row in df.iterrows():
+            # print(i, row['URL'])
+            self.route_urls[row['URL']] = 1
+            routes.append(row['URL'].split('/')[4])
+        
+        self.dict[kind] = routes
 
 class RouteScraper:
     """
@@ -116,7 +101,7 @@ class RouteScraper:
         if address[2] != DOMAIN:
             raise Exception('not a mountain project page')
         if address[3] != 'route':
-            raise Exception('not a user')
+            raise Exception('not a route')
 
         page = requests.get(url)
         if page.status_code != 200:
