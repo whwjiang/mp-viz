@@ -100,9 +100,5 @@ class query_tests(unittest.TestCase):
         q = Query('0+1%vis')
         self.assertTrue(True)
 
-        
-
-
-
 if __name__ == '__main__':
     unittest.main()
