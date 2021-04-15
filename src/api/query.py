@@ -144,15 +144,3 @@ class Query:
     def __exec_vis(self):
         pass
      
-
-def main():
-    parser = argparse.ArgumentParser(description='query static info')
-    parser.add_argument('-q', '--query', nargs=1, help='query info')
-
-    args = parser.parse_args()
-
-    q = Query(args.query[0])
-    pprint.pprint(q.send_request())
-
-if __name__ == '__main__':
-    main()

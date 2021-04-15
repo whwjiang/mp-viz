@@ -16,5 +16,8 @@ This week, I implemented various algorithms to compute some static information b
 - get user info: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=200305518%user
 - get route info: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=106333612%route
 - get common ticks: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=200305518+200696013%tick
-- get hardest route: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=200305518%hardest-boulder
+- get hardest boulder: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=200305518%hardest-boulder
+- get hardest sport: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=200305518%hardest-sport
+- invalid: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=200305518%hardest-spor
+
 

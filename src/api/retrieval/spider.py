@@ -37,21 +37,3 @@ def route_scrape_and_insert(url):
             print('{}: updated route'.format(route.id))
         else:
             print('{}: inserted route'.format(route.id))
-
-def main():
-    parser = argparse.ArgumentParser(description='Mountain Project scraper')
-    kind = parser.add_mutually_exclusive_group()
-    kind.add_argument('-u', '--user', nargs=1, help='scrape a user')
-    kind.add_argument('-r', '--route', nargs=1, help='scrape a route')
-
-    args = parser.parse_args()
-
-    if args.user:
-        user_scrape_and_insert(args.user[0])
-
-    if args.route:
-        route_scrape_and_insert(args.route[0])
-
-
-if __name__ == "__main__":
-    main()

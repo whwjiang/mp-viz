@@ -55,23 +55,25 @@ class Route:
         a, -, a/b, b, none, b/c, c, +, c/d, d
         """
         score = 4
-        pattern = '5(\.[1]?[0-9])([+,-])?(a/b|b/c|c/d)?([a-d])?'
+        pattern = '5\.([1]?[0-9])([+,-])?(a/b|b/c|c/d)?([a-d])?'
         match = re.search(pattern, self.grade)
         # TODO: implement parsing for ice climbing, other systems
         if match is None:
             return score
         score += int(match.group(1)) * 10
-        if match.group(2) == '+':
-            score += 3
-        elif match.group(2) == '-':
-            score -= 3
-        elif match.group(3) == 'a/b':
-            score -= 2
-        elif match.group(3) == 'b/c':
-            score += 1
-        elif match.group(3) == 'c/d':
-            score += 4
-        elif match.group(4) == 'a':
+        if match.group(2) is not None:
+            if match.group(2) == '+':
+                score += 3
+            elif match.group(2) == '-':
+                score -= 3
+        elif match.group(3) is not None:
+            if match.group(3) == 'a/b':
+                score -= 2
+            elif match.group(3) == 'b/c':
+                score += 1
+            elif match.group(3) == 'c/d':
+                score += 4
+        if match.group(4) == 'a':
             score -= 4
         elif match.group(4) == 'b':
             score -= 1
