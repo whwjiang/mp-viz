@@ -22,8 +22,6 @@ import pprint
 import re
 import argparse
 
-sys.path.append('.')
-
 from .compute import common, popular, unpopular, hardest
 from .route import Route
 from .retrieval.database import Database
@@ -35,7 +33,9 @@ QUERY_T = ('user',
            'popular', 
            'unpopular', 
            'hardest',
-           'vis')
+           'vis',
+           'all'
+           )
 
 ROUTE_T = ('boulder',
            'sport',
@@ -74,6 +74,8 @@ class Query:
             return self.__exec_unpopular()
         if self.query_t == 'vis':
             return self.__exec_vis()
+        if self.query_t == 'all':
+            return self.__exec_all()
         return self.__exec_hardest()
 
     def __parse_query(self, q: str):
@@ -143,4 +145,7 @@ class Query:
 
     def __exec_vis(self):
         pass
+
+    def __exec_all(self):
+        
      
