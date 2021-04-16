@@ -57,10 +57,10 @@ def popular(l1: list, l2: list) -> (Route, Route):
 
     p1 = None
     if s1_exclusive:
-        p1 = max(s1_exclusive, key = lambda k: k.rating_count)
+        p1 = max(s1_exclusive, key = lambda k: int(k.rating_count))
     p2 = None
     if s2_exclusive:
-        p2 = max(s2_exclusive, key = lambda k: k.rating_count)
+        p2 = max(s2_exclusive, key = lambda k: int(k.rating_count))
 
     return (p1, p2)
 
@@ -88,10 +88,10 @@ def unpopular(l1: list, l2: list) -> (Route, Route):
 
     p1 = None
     if s1_exclusive:
-        p1 = min(s1_exclusive, key = lambda k: k.rating)
+        p1 = min(s1_exclusive, key = lambda k: float(k.rating))
     p2 = None
     if s2_exclusive:
-        p2 = min(s2_exclusive, key = lambda k: k.rating)
+        p2 = min(s2_exclusive, key = lambda k: float(k.rating))
 
     return (p1, p2)
 
