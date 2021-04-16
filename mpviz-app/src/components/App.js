@@ -12,7 +12,7 @@ const App = () => {
     const [state, setState] = useState(initialState);
 
     const handleChange = users => {
-        setState({...users, [submitted]: true});
+        setState({...users, submitted: true});
     }
 
     return (
@@ -24,6 +24,17 @@ const App = () => {
                 <div className='col m12 s12'>
                     <UserForm change={handleChange} />
                 </div>
+            </div>
+            <div className='row'>
+                {state.submitted ? (
+                    <>
+                    <div className='center white-text'>{state.user0}, {state.user1}</div>
+                    </>
+                ) : (
+                    <>
+                    <div className='center white-text'>Nothing submitted</div>
+                    </>
+                )}
             </div>
         </div>
     );
