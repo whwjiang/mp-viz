@@ -25,7 +25,7 @@ def exec_query(query_str: str):
         q = Query(query_str)
         return jsonify(q.send_request())
     except:
-        return make_response(jsonify({'error 400': 'Bad request'}), 400)
+        return make_response(jsonify({'error': 'Bad request'}), 400)
 
 """
 @app.errorhandler(404)

@@ -28,11 +28,16 @@ const App = () => {
             <div className='row'>
                 {state.submitted ? (
                     <>
-                    <div className='center white-text'>{state.user0}, {state.user1}</div>
+                        <UserData 
+                            user0={state.user0} 
+                            user1={state.user1}
+                        />
                     </>
                 ) : (
                     <>
-                    <div className='center white-text'>Nothing submitted</div>
+                        <div className='center white-text'>
+                            Nothing submitted
+                        </div>
                     </>
                 )}
             </div>

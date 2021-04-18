@@ -8,12 +8,16 @@ the result of the query.
 
 types of queries:
 
+<user>%user: get user information for <user>
+<route>%route: get route information for <route>
 <user>+<user>%ticks: get common ticks between two users
 <user>+<user>%todos: get common todos between two users
 <user>+<user>%popular: get popular climb exclusive to either user
 <user>+<user>%unpopular: get popular climb exclusive to either user
 <user>%hardest-<type>: get hardest <type> climb in user's ticks
 <user>+<user>%vis: get visualization formed from two users (not done)
+
+<user>+<user>%all: get all components
 
 """
 
