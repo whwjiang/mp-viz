@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import UserForm from './UserForm.js';
+import APIData from './APIData.js';
 import './App.css';
+
+import 'materialize-css/dist/css/materialize.min.css';
 
 const initialState = {
     user0: '',
@@ -18,29 +21,21 @@ const App = () => {
     return (
         <div className='container'>
             <div className='row center'>
-                <h1 className='white-text'>mpviz</h1>
+                <h1 className='black-text'>mpviz</h1>
             </div>
             <div className='row'>
                 <div className='col m12 s12'>
                     <UserForm change={handleChange} />
                 </div>
             </div>
-            <div className='row'>
-                {state.submitted ? (
-                    <>
-                        <UserData 
-                            user0={state.user0} 
-                            user1={state.user1}
-                        />
-                    </>
-                ) : (
-                    <>
-                        <div className='center white-text'>
-                            Nothing submitted
-                        </div>
-                    </>
-                )}
-            </div>
+            {state.submitted &&
+                <>
+                    <APIData 
+                        user0={state.user0} 
+                        user1={state.user1}
+                    />
+                </>
+            }
         </div>
     );
 }

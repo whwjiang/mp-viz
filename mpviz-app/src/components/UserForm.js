@@ -50,10 +50,11 @@ const UserForm = ({ change }) => {
             <div className="center">
                 <button
                     id="submit-button"
-                    type="button"
                     disabled={state.user0 === '' 
                            || state.user1 === '' 
                            || state.user0 === state.user1 }
+                    className="btn waves-effect waves-light findbtn"
+                    type="submit"
                     onClick={handleSubmit}
                 >
                     Submit
