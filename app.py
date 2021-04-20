@@ -14,13 +14,14 @@ import sys
 import os
 
 from flask import Flask, jsonify, request, make_response
+from flask_cors import CORS
 from src.api.query import Query
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/api/q=<query_str>', methods=['GET'])
 def exec_query(query_str: str):
-    # print(query_str)
     try:
         q = Query(query_str)
         return jsonify(q.send_request())

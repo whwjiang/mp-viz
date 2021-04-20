@@ -28,14 +28,12 @@ const App = () => {
                     <UserForm change={handleChange} />
                 </div>
             </div>
-            {state.submitted &&
-                <>
-                    <APIData 
-                        user0={state.user0} 
-                        user1={state.user1}
-                    />
-                </>
-            }
+            {state.submitted && <>
+                <APIData 
+                    user0={state.user0} 
+                    user1={state.user1}
+                />
+            </> }
         </div>
     );
 }

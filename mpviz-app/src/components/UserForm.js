@@ -25,28 +25,28 @@ const UserForm = ({ change }) => {
     return (
         <>
         <div className="row">
-                <div className="col m6 s12">
-                    <label htmlFor="user0">First User ID</label>
-                    <input
-                        id="user0"
-                        name="user0"
-                        type="text"
-                        value={state.user0}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="col m6 s12">
-                    <label htmlFor="user1">Second User ID</label>
-                    <input
-                        id="user1"
-                        name="user1"
-                        type="text"
-                        value={state.user1}
-                        onChange={handleChange}
-                    />
-                </div>
+            <div className="col m6 s12">
+                <label htmlFor="user0">First User ID</label>
+                <input
+                    id="user0"
+                    name="user0"
+                    type="text"
+                    value={state.user0}
+                    onChange={handleChange}
+                />
             </div>
+
+            <div className="col m6 s12">
+                <label htmlFor="user1">Second User ID</label>
+                <input
+                    id="user1"
+                    name="user1"
+                    type="text"
+                    value={state.user1}
+                    onChange={handleChange}
+                />
+            </div>
+        </div>
             <div className="center">
                 <button
                     id="submit-button"
