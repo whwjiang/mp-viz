@@ -15,11 +15,11 @@ db = Database()
 class query_tests(unittest.TestCase):
 
     def test_hardest(self):
-        q = Query('0%hardest-boulder')
+        q = Query('0%hardest')
         result = q.send_request()
         route_file = open('json/route0.json', 'r')
         route_data = json.load(route_file)
-        self.assertEqual(result['hardest'], route_data)
+        self.assertEqual(result['hardest']['boulder'], route_data)
         route_file.close()
 
     def test_popular(self):
@@ -99,6 +99,12 @@ class query_tests(unittest.TestCase):
     def test_request_vis_empty(self):
         q = Query('0+1%vis')
         self.assertTrue(True)
+
+    def test_all(self):
+        q = Query('200305518+200696013%all')
+        result = q.send_request()
+        # pprint(result)
+
 
 if __name__ == '__main__':
     unittest.main()

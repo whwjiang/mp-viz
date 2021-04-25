@@ -1,0 +1,21 @@
+body{
+    background-color: #FFFFFF;
+}
+
+form, input, label, p {
+    color: black !important;
+}
+
+.avatar{
+  width:200px;
+  height:200px;
+  object-fit:cover;
+  border-radius:50%;
+}
+
+.routePicture{
+    width:300px;
+    height:200px;
+    object-fit:cover;
+    border-radius:25px;
+  }

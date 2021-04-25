@@ -1,20 +1,12 @@
-# sp21-cs242-project: mpviz Week 2
+# sp21-cs242-project: mpviz Week 3
 
 ## Description
 
-This week, I implemented various algorithms to compute some static information based on users. All the information I computed is available as an API hosted in flask. I then started working on the data visualization.
+This week, I implemented the front end component of my Mountain Project visualization. The webpage renders important information calculated in the previous week's work in a React based webpage. The manual test plan can be found in ./mpviz-app/mpviz_manual_test_plan.pdf.
 
 ## Example Execution
 
-- get user info: python3 src/api/query.py -q '200305518%user'
-- get route info: python3 src/api/query.py -q '106333612%route'
-- get common ticks: python3 src/api/query.py -q '200305518+200696013%tick'
-- get hardest route: python3 src/api/query.py -q '200305518%hardest-boulder'
+- user 0: 200305518
+- user 1: 200696013
 
-## Example API calls:
-
-- get user info: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=200305518%user
-- get route info: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=106333612%route
-- get common ticks: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=200305518+200696013%tick
-- get hardest route: curl -H "Content-Type: application/json" -i http://localhost:5000/api/q=200305518%hardest-boulder
 
