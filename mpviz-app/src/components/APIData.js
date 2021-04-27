@@ -6,6 +6,7 @@ import Loader from "react-loader-spinner";
 import RouteView from "./RouteView.js";
 import UserView from "./UserView.js";
 import RouteList from "./RouteList.js";
+import Network from "./Network.js"
 import './App.css';
 
 function formatRequestUrl(user0, user1) {
@@ -20,9 +21,11 @@ const initialState = {
 
 const APIData = ({ user0, user1 }) => {
     const [state, setState] = useState(initialState);
+    user0;
+    user1;
 
     useEffect( () => {
-        var requestUrl = formatRequestUrl(user0, user1);
+        var requestUrl = formatRequestUrl('200305518', '200696013');
         console.log(requestUrl)
 
         fetch(requestUrl, {
@@ -63,6 +66,20 @@ const APIData = ({ user0, user1 }) => {
                     <UserView user={state.contents.users[1]} /> 
                 </div>
             </div>
+
+            <div className="row">
+                <h5>Tick Network: </h5>
+            </div>
+            <div className="row">
+                <Network graph={state.contents.vis.tick} />
+            </div>
+
+            <div className="row">
+                <h5>To-do Network: </h5>
+            </div>
+            <div className="row">
+                <Network graph={state.contents.vis.todo} />
+            </div>     
             
             <br></br>
             <div className="row">
@@ -144,7 +161,7 @@ const APIData = ({ user0, user1 }) => {
                 <RouteList 
                     data={state.contents.todo}
                 />
-            </div>
+            </div>  
 
             </> ) : ( <>
                 <div className="center">

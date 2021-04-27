@@ -1,9 +1,9 @@
 body{
-    background-color: #FFFFFF;
+  background-color: #FFFFFF;
 }
 
 form, input, label, p {
-    color: black !important;
+  color: black !important;
 }
 
 .avatar{
@@ -14,8 +14,14 @@ form, input, label, p {
 }
 
 .routePicture{
-    width:300px;
-    height:200px;
-    object-fit:cover;
-    border-radius:25px;
-  }
+  width:300px;
+  height:200px;
+  object-fit:cover;
+  border-radius:25px;
+}
+
+.graph{
+  height:800px;
+  border-radius:25px;
+  border-style: solid;
+}

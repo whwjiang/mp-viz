@@ -103,7 +103,7 @@ class query_tests(unittest.TestCase):
     def test_all(self):
         q = Query('200305518+200696013%all')
         result = q.send_request()
-        # pprint(result)
+        pprint(result)
 
 
 if __name__ == '__main__':

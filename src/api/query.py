@@ -26,7 +26,7 @@ import pprint
 import re
 import argparse
 
-from .compute import common, popular, unpopular, hardest
+from .compute import common, popular, unpopular, hardest, vis
 from .route import Route
 from .retrieval.database import Database
 
@@ -157,8 +157,13 @@ class Query:
         return hard_dict
 
     def __exec_vis(self):
-        # TODO: implement vis
-        return {}
+        todo_graph = vis(self.users, self.todos[0], self.todos[1])
+        tick_graph = vis(self.users, self.ticks[0], self.ticks[1])
+
+        return {
+            'todo': todo_graph, 
+            'tick': tick_graph
+        }
 
     def __exec_all(self):
         result = {}
@@ -170,6 +175,7 @@ class Query:
         result['popular'] = self.__exec_popular()
         result['unpopular'] = self.__exec_unpopular()
         result['hardest'] = [self.__exec_hardest()]
+        result['vis'] = self.__exec_vis()
         self.ticks[0], self.ticks[1] = self.ticks[1], self.ticks[0]
         result['hardest'].append(self.__exec_hardest())
         self.query_t = 'all'

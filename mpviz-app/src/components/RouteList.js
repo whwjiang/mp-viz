@@ -70,6 +70,4 @@ RouteList.propTypes = {
     data: PropTypes.object.isRequired
 }
 
-    
-
 export default RouteList;

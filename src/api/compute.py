@@ -12,7 +12,7 @@ Things computable:
 - hardest climb exclusive to either tick list
 
 """
-
+import math
 from .route import Route
 
 def common(l1: list, l2: list) -> list:
@@ -113,3 +113,70 @@ def hardest(l: list) -> Route:
         return None
     else:
         return hard
+
+def _compute_node_size(rating_count: str):
+    return int(math.log(int(rating_count))) + 1
+
+def _route_to_edge(route: Route, user: str) -> dict:
+    edge = {
+        'id': 'e{}-{}'.format(route._id, user), 
+        'source': user, 
+        'target': route._id
+    }
+    return edge
+
+def _route_to_node(route: Route) -> dict:
+    node = {
+        'id': route._id, 
+        'label': route.name, 
+        'color': '#fcba03', 
+        'size': _compute_node_size(route.rating_count),
+        'x': 0,
+        'y': 0
+    }
+    return node
+
+
+def vis(users: list, l1: list, l2: list) -> dict:
+    """
+    creates a network based on the two lists and the users
+
+    @params
+    users: a list of users (max: 2)
+    l1: list of routes that corresponds to users[0]
+    l2: list of routes that corresponds to users[1]
+
+    @returns:
+    dict that is a graph parsable by sigma.js
+    """
+    edges = []
+    nodes = []
+
+    nodes.append({
+        'id': users[0]['_id'],
+        'label': users[0]['name'],
+        'color': '#43d5fa',
+        'size': 11,
+        'x': -10,
+        'y': 0
+    })
+
+    nodes.append({
+        'id': users[1]['_id'],
+        'label': users[1]['name'],
+        'color': '#32a852',
+        'size': 11,
+        'x': 10,
+        'y': 0
+    })
+
+    s1 = set(l1)
+    s2 = set(l2)
+    s3 = s1.union(s2)
+
+    edges += list(map(lambda x: _route_to_edge(x, users[0]['_id']), s1))
+    edges += list(map(lambda x: _route_to_edge(x, users[1]['_id']), s2))
+
+    nodes += list(map(_route_to_node, s3))
+
+    return {'nodes': nodes, 'edges': edges}
